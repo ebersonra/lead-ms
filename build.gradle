@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.4'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'br.org.leads.ms'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    runtimeOnly('com.h2database:h2')
+}
+
+tasks.named("bootJar") {
+    archiveClassifier = 'boot'
+}
+
+tasks.named("jar") {
+    archiveClassifier = ''
+}
+
+springBoot {
+    mainClass = 'br.com.leads.ms.LeadsPhonesApplication'
+}
+
+test {
+    useTestNG()
+}

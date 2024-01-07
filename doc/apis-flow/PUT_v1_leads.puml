@@ -6,7 +6,7 @@ autonumber
 participant frontend
 
 box backend #LightGray
-frontend -> leads_ms: POST /v1/leads
+frontend -> leads_ms: PUT /v1/leads
 
 activate leads_ms
 

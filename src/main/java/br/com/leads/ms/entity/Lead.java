@@ -6,11 +6,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -107,5 +107,21 @@ public class Lead extends EntityBase {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if(obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Lead lead = (Lead) obj;
+        return (getUniqueId() == lead.getUniqueId()) && (Objects.equals(uniqueId, lead.uniqueId));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUniqueId(), uniqueId);
     }
 }

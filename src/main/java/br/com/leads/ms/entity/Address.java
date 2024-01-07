@@ -5,11 +5,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -120,5 +120,21 @@ public class Address extends EntityBase {
 
     public void setLead(Lead lead) {
         this.lead = lead;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if(obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Address address = (Address) obj;
+        return (getUniqueId() == address.getUniqueId()) && (Objects.equals(uniqueId, address.uniqueId));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUniqueId(), uniqueId);
     }
 }

@@ -9,9 +9,15 @@ box backend #LightGray
 frontend -> leads_ms: PUT /v1/leads
 
 activate leads_ms
+database leads_ms_db
 
 alt validate request
-leads_ms -> leads_ms
+leads_ms -> leads_ms: Validate request body
+
+leads_ms -> leads_ms_db: Verify if Lead with phone exists
+activate leads_ms_db
+leads_ms_db --> leads_ms: If return lead, phone number exists.\n If not, phone number not exists in database.
+
     note left
         <size:10>**Request body:**</size>
         <size:10>{</size>
@@ -21,18 +27,16 @@ leads_ms -> leads_ms
         <size:10>   "lastname": "Doe"</size>
         <size:10>}</size>
     end note
-else if request is valid
-database leads_ms_db
+else If lead phone number exists
 
-leads_ms -> leads_ms_db: create lead
-activate leads_ms_db
+leads_ms -> leads_ms_db: updated lead
 
-leads_ms_db --> leads_ms: return lead
+leads_ms_db --> leads_ms: return lead updated
 deactivate leads_ms_db
-leads_ms --> frontend: Return Http Status **200** and response lead with uuid
+leads_ms --> frontend: Return Http Status **200**\n and response lead with fields updated
 
-else if request is invalid
-leads_ms --> frontend: Return Http Status **422** with exception error
+else If lead phone number not exists
+leads_ms --> frontend: Return Http Status **422**\n with exception error
 
 deactivate leads_ms
 end box

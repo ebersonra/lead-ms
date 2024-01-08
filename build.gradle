@@ -38,7 +38,7 @@ tasks.named("jar") {
 }
 
 springBoot {
-    mainClass = 'br.com.leads.ms.LeadsPhonesApplication'
+    mainClass = 'br.com.leads.ms.LeadsMsApplication'
 }
 
 test {

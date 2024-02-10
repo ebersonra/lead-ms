@@ -12,5 +12,7 @@ public record LeadRequest(
     @ApiModelProperty(value = "Lead email", example = "john@example.com")
     String email,
     @ApiModelProperty(value = "Lead last name", example = "Doe", required = true)
-    String lastname) {
+    String lastname,
+    @ApiModelProperty(value = "Lead type", example = "1-CLIENT, 2-PROSPECT, 3-PARTNER, 4-SUPPLIER e 5-OTHERS", required = true)
+    Long leadTypeValue) {
 }

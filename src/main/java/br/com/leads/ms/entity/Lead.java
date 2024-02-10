@@ -1,10 +1,13 @@
 package br.com.leads.ms.entity;
 
+import br.com.leads.ms.domain.enums.LeadTypeEnum;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -35,6 +38,10 @@ public class Lead extends EntityBase {
     @Column(name = "LEAD_LASTNAME")
     private String lastname;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "LEAD_TYPE")
+    private LeadTypeEnum leadType;
+
     // 1 Lead has many Addresses
     @OneToMany(mappedBy = "lead", cascade = CascadeType.ALL)
     private List<Address> addresses;
@@ -42,19 +49,21 @@ public class Lead extends EntityBase {
     public Lead() {
     }
 
-    public Lead(UUID uniqueId, String phone, String email, String firstname, String lastname) {
+    public Lead(UUID uniqueId, String phone, String email, String firstname, String lastname, LeadTypeEnum leadType) {
         this.uniqueId = uniqueId;
         this.firstname = firstname;
         this.email = email;
         this.phone = phone;
         this.lastname = lastname;
+        this.leadType = leadType;
     }
 
-    public Lead(String phone, String email, String firstname, String lastname) {
+    public Lead(String phone, String email, String firstname, String lastname, LeadTypeEnum leadType) {
         this.firstname = firstname;
         this.email = email;
         this.phone = phone;
         this.lastname = lastname;
+        this.leadType = leadType;
     }
 
     // getters and setters
@@ -99,6 +108,14 @@ public class Lead extends EntityBase {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public LeadTypeEnum getLeadType() {
+        return leadType;
+    }
+
+    public void setLeadType(LeadTypeEnum leadType) {
+        this.leadType = leadType;
     }
 
     public List<Address> getAddresses() {

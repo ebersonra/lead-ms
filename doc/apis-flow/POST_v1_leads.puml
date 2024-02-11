@@ -25,6 +25,7 @@ leads_ms_db --> leads_ms: If return lead, phone number exists.\n If not, phone n
         <size:10>   "phone": "99999999999",</size>
         <size:10>   "email": "John@email.com"</size>
         <size:10>   "lastname": "Doe"</size>
+        <size:10>   "leadTypeValue": "1"</size>
         <size:10>}</size>
     end note
 else If lead phone number not exists

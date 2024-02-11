@@ -1,5 +1,6 @@
 package br.com.leads.ms.domain.dto;
 
+import br.com.leads.ms.domain.enums.LeadTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,5 +19,5 @@ public record LeadDto(
     @ApiModelProperty(value = "Lead lastname", example = "Doe")
     String lastname,
     @ApiModelProperty(value = "Lead type", example = "1-CLIENT, 2-PROSPECT, 3-PARTNER, 4-SUPPLIER e 5-OTHERS")
-    Long leadTypeValue){
+    LeadTypeEnum leadType){
 }

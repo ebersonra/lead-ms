@@ -1,6 +1,7 @@
 package br.com.leads.ms.service;
 
 import br.com.leads.ms.domain.dto.LeadDto;
+import br.com.leads.ms.domain.enums.LeadTypeEnum;
 import br.com.leads.ms.domain.exception.LeadException;
 import br.com.leads.ms.domain.request.LeadRequest;
 import br.com.leads.ms.domain.response.LeadListResponse;
@@ -59,13 +60,15 @@ public class LeadService {
 
     private Lead toEntity(LeadRequest leadRequest, boolean isUpdate) {
 
+        LeadTypeEnum leadType = LeadTypeEnum.fromById(leadRequest.leadTypeValue());
+
         if (isUpdate) {
             Lead lead = findLeadByPhone(leadRequest.phone());
-            return new Lead(lead.getUniqueId(), formatPhone(leadRequest.phone()), leadRequest.email(), leadRequest.firstname(), leadRequest.lastname());
+            return new Lead(lead.getUniqueId(), formatPhone(leadRequest.phone()), leadRequest.email(), leadRequest.firstname(), leadRequest.lastname(), leadType);
         }
 
         verifyIfLeadExists(leadRequest.phone());
-        return new Lead(formatPhone(leadRequest.phone()), leadRequest.email(), leadRequest.firstname(), leadRequest.lastname());
+        return new Lead(formatPhone(leadRequest.phone()), leadRequest.email(), leadRequest.firstname(), leadRequest.lastname(), leadType);
     }
 
     private void verifyIfLeadExists(String phone) {
@@ -82,6 +85,6 @@ public class LeadService {
     }
 
     private LeadDto toDto(Lead lead) {
-        return new LeadDto(lead.getUniqueId(), lead.getFirstname(), lead.getEmail(), lead.getPhone(), lead.getLastname());
+        return new LeadDto(lead.getUniqueId(), lead.getFirstname(), lead.getEmail(), lead.getPhone(), lead.getLastname(), lead.getLeadType().getValue());
     }
 }

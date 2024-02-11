@@ -1,9 +1,12 @@
 package br.com.leads.ms.entity;
 
+import br.com.leads.ms.domain.enums.AddressTypeEnum;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -42,6 +45,10 @@ public class Address extends EntityBase {
 
     @Column(name = "ADDRESS_DISTRICT")
     private String district;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "ADDRESS_TYPE")
+    private AddressTypeEnum addressType;
 
     // N Addresses has 1 Lead
     @ManyToOne
@@ -112,6 +119,14 @@ public class Address extends EntityBase {
 
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    public AddressTypeEnum getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(AddressTypeEnum addressType) {
+        this.addressType = addressType;
     }
 
     public Lead getLead() {

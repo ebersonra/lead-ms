@@ -24,5 +24,7 @@ public record AddressDto(
     @ApiModelProperty(value = "Address country", example = "Brazil", required = true)
     String country,
     @ApiModelProperty(value = "Address zip code", example = "00000-000", required = true)
-    String zipCode) {
+    String zipCode,
+    @ApiModelProperty(value = "Address type", example = "1-COMMERCIAL, 2-RESIDENTIAL, 3-BILLING e 4-OTHERS", required = true)
+    Long addressTypeValue) {
 }

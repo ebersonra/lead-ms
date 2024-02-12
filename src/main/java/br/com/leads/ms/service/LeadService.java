@@ -85,6 +85,6 @@ public class LeadService {
     }
 
     private LeadDto toDto(Lead lead) {
-        return new LeadDto(lead.getUniqueId(), lead.getFirstname(), lead.getEmail(), lead.getPhone(), lead.getLastname(), lead.getLeadType().getValue());
+        return new LeadDto(lead.getUniqueId(), lead.getFirstname(), lead.getEmail(), lead.getPhone(), lead.getLastname(), lead.getLeadType());
     }
 }

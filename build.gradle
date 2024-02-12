@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.5.4'
+    id 'application'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -18,6 +19,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'org.apache.commons:commons-lang3'
 
     runtimeOnly('com.h2database:h2')
 
@@ -37,10 +39,10 @@ tasks.named("jar") {
     archiveClassifier = ''
 }
 
-springBoot {
-    mainClass = 'br.com.leads.ms.LeadsMsApplication'
-}
-
 test {
     useTestNG()
+}
+
+application {
+    mainClass.set('br.com.leads.ms.LeadsMsApplication')
 }
